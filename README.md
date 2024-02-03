@@ -12,6 +12,8 @@ This component replaces the NCU control unit with custom hardware based on ESP32
 
 <p align="center">
   <img width="400" src="https://github.com/csabigee/nobo/assets/96885207/bae032d4-3c0c-49d0-899d-9c90e8a9ba0c">
+  <img width="400" src="https://github.com/csabigee/nobo/assets/96885207/b252c0ee-e4ac-4975-acbd-730e30660cf6">
+
 </p>
 <p align="center">
   <em>Nobo Climate Device UI in Home Assistant.</em>
