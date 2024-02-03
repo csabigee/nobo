@@ -54,4 +54,11 @@ Configuration variables:
 - **power** (*Optional*): Send the instantaneous power
   - **name** (**Required**, string): The name for the power sensor.
   - **id** (*Optional*,  [ID](https://esphome.io/guides/configuration-types#config-id)): Set the ID of this sensor for use in lambdas.
+
+Others:
+------------------------
  
+[:mag: Reverse engineering the protocol :mag_right:](../../wiki/Home)
+
+[:hammer_and_wrench: Building the custom thermostat :hammer_and_wrench:](../../wiki/Building-the-custom-thermostat)
+
