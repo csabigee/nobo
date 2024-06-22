@@ -58,7 +58,7 @@ Configuration variables:
 Links:
 ------------------------
  
-[:mag: Reverse engineering the protocol :mag_right:](../../wiki/Home)
+[:mag: Reverse engineering the protocol :mag_right:](https://github.com/csabigee/nobo/wiki/Home)
 
 [:hammer_and_wrench: Building the custom thermostat :hammer_and_wrench:](https://www.hackster.io/csabigee/nobo-wireless-thermostat-01f106)
 
