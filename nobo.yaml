@@ -51,7 +51,7 @@ web_server:
 external_components:
   - source:
       type: local
-      path: my_components
+      path: components
 
 climate:
   - platform: nobo
