@@ -55,10 +55,15 @@ Configuration variables:
   - **name** (**Required**, string): The name for the power sensor.
   - **id** (*Optional*,  [ID](https://esphome.io/guides/configuration-types#config-id)): Set the ID of this sensor for use in lambdas.
 
-Others:
+Links:
 ------------------------
  
 [:mag: Reverse engineering the protocol :mag_right:](../../wiki/Home)
 
-[:hammer_and_wrench: Building the custom thermostat :hammer_and_wrench:](../../wiki/Building-the-custom-thermostat)
+[:hammer_and_wrench: Building the custom thermostat :hammer_and_wrench:](https://www.hackster.io/csabigee/nobo-wireless-thermostat-01f106)
 
+[:zap: PCB design files :zap:](https://github.com/csabigee/nobo-pcb)
+
+[:gift: Enclosure design files :gift:](https://github.com/csabigee/nobo-enclosure)
+
+[:octocat: Software sources :octocat:](https://github.com/csabigee/nobo)
