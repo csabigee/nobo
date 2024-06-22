@@ -1,0 +1,118 @@
+esphome:
+  name: nobo
+  on_boot:
+    then:
+      - light.turn_on: ledlight
+      - light.control:
+          id: ledlight
+          effect: Connection
+
+esp8266:
+  board: d1_mini_lite
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret ha_token  
+
+ota:
+  password: !secret ha_pwd
+
+wifi:
+  ssid: !secret net_name
+  password: !secret net_pass
+  on_connect:
+    - light.turn_on: ledlight
+    - light.control:
+        id: ledlight
+        effect: StatusIndicator
+  on_disconnect:
+    - light.turn_on: ledlight
+    - light.control:
+        id: ledlight
+        effect: Connection
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Nobo Fallback Hotspot"
+    password: "3QmeXUbBbO85"
+
+
+captive_portal:
+    
+# Example configuration entry
+web_server:
+  port: 80
+
+
+external_components:
+  - source:
+      type: local
+      path: my_components
+
+climate:
+  - platform: nobo
+    id: noboheater
+    name: "Nobo Heater LivingRoom"
+    nominal_power: 2000 W
+    power:
+      name: "Nobo Heater Power LivingRoom"
+      id: nobopower
+    update_interval: 30s
+
+i2c:
+  sda: GPIO4
+  scl: GPIO5
+  scan: False
+  frequency: 50kHz
+  
+light:
+  - platform: neopixelbus
+    name: "Nobo neo light"
+    id: ledlight
+    type: GRB
+    variant: WS2812
+    pin: GPIO15
+    num_leds: 1
+    effects:
+      - flicker:
+          name: Flicker Effect With Custom Values
+          alpha: 95%
+          intensity: 1.5%
+      - lambda:
+          name: StatusIndicator
+          update_interval: 1s
+          lambda: |-
+            float current_power = id(noboheater).get_heater_power_percentage();
+            auto call = id(ledlight).make_call();
+            call.set_transition_length(1);
+            float cold_color[3]={0.22,0.77,1.0};
+            float mid_color[3]={1.0,0.77,0.0};
+            float warm_color[3]={1.0,0.11,0.06};
+            float mid_point=0.5*100;
+            float current_color[3];
+            if(current_power<mid_point) {
+              for(int ii=0;ii<3;ii++) {
+                current_color[ii]=cold_color[ii]+(mid_color[ii]-cold_color[ii])*current_power/mid_point;
+              }
+            } else {
+              for(int ii=0;ii<3;ii++) {
+                current_color[ii]=mid_color[ii]+(warm_color[ii]-mid_color[ii])*(current_power-mid_point)/mid_point;
+              }
+            }
+            call.set_rgb(current_color[0],current_color[1],current_color[2]);
+            call.perform();
+      - strobe:
+          name: Connection
+          colors:
+            - state: true
+              brightness: 100%
+              red: 22%
+              green: 77%
+              blue: 100%
+              duration: 400ms
+            - state: false
+              duration: 400ms
